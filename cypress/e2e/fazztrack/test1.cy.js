@@ -92,11 +92,16 @@ describe("your first test", () => {
     cy.get("table#tableQuote")
       .getTable()
       .should(($tableData) => {
-        for (let k = 1; k < $tableData.length + 1; k++) {
-          cy.log($tableData[k]);
-          cy.log(expectedTable[k]);
+        for (let k = 1; k < $tableData.length; k++) {
           expect($tableData[k]).to.contain(expectedTable[k]);
         }
+      });
+
+    // verify get value quote 1
+    cy.get(':nth-child(2) > [name="tableColumnQuote"]')
+      .should("be.visible")
+      .and(($text) => {
+        expect($text).to.contain("quote 1");
       });
   });
 
