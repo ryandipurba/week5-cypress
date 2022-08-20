@@ -10,6 +10,10 @@ class examplePage {
   addQuote() {
     cy.get("#buttonAddQuote").click();
   }
+
+  clearQuote() {
+    cy.get("#buttonAddQuote").click();
+  }
 }
 
 export default examplePage;

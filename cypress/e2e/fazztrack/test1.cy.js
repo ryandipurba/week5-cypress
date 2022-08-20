@@ -37,7 +37,7 @@ describe("your first test", () => {
   });
 
   // Create test to input at least 3 quote with different color
-  it.only("check input", function () {
+  it("check input", function () {
     const examplePage = new ExamplePage();
     const expectedTable = [
       {
@@ -122,5 +122,24 @@ describe("your first test", () => {
     });
     // Close alert
     // cy.get("button").contains("OK").click();
+  });
+
+  it.only("Test Cleaar quote", function () {
+    const examplePage = new ExamplePage();
+    examplePage.inputQuote("this quote");
+    examplePage.selectColor(Math.floor(Math.random() * 5));
+    examplePage.addQuote();
+
+    // verify quote
+    cy.get(':nth-child(2) > [data-testid="quote_container"] > .panel-body')
+      .should("be.visible")
+      .and(($text) => {
+        expect($text).to.contain("this quote");
+      });
+
+    cy.wait(3000);
+    cy.get(
+      ':nth-child(2) > [data-testid="quote_container"] > .panel-body'
+    ).click();
   });
 });
